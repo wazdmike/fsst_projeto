@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../conn.php';
+$paginaAtual = basename($_SERVER['PHP_SELF']);
 
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
