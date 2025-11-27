@@ -1,0 +1,71 @@
+nav {
+    background-color: oklch(98.5% 0 0);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn {
+    color: oklch(75% 0.183 55.934) !important;
+    border: 2px solid #ffc107;
+    background-color: white;
+}
+
+.hero {
+    background: #ffffff;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(250, 245, 227, 1) 100%);
+
+    color: black;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 4.2rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+.feature-card {
+    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 251, 240, 1) 100%);
+
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.feature-card:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    background-color: oklch(97% 0 0);
+}
+
+.main-btn {
+    color: oklch(75% 0.183 55.934) !important;
+    border: 2px solid #ffc107;
+    background-color: white;
+}
+
+.main-btn:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+footer {
+    background: oklch(96.7% 0.001 286.375);
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer a {
+    color: #ffc107;
+}
+
+.logo {
+    width: 4rem;
+}

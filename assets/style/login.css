@@ -1,0 +1,43 @@
+    body {
+        background: #f4f6f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        text-align: center;
+        border-bottom: none;
+    }
+    
+    .card-header p {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .card-body {
+        padding-top: 4px !important;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #007bff;
+    }
+
+    .input-group-text {
+        background: #fff;
+        border-right: none;
+    }
+
+    .form-control {
+        border-left: none;
+    }
+
+    button a{
+        color: white;
+    }
