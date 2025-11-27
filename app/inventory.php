@@ -88,6 +88,34 @@ $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $stmtCat = $pdo->query("SELECT * FROM categoria ORDER BY nome");
 $categorias = $stmtCat->fetchAll(PDO::FETCH_ASSOC);
 
+$limiteCat = 5;
+$paginaCat = isset($_GET['pagina_cat']) ? (int) $_GET['pagina_cat'] : 1;
+if ($paginaCat < 1) $paginaCat = 1;
+
+$offsetCat = ($paginaCat - 1) * $limiteCat;
+
+$totalCat = $pdo->query("SELECT COUNT(*) FROM categoria")->fetchColumn();
+$totalPaginasCat = ceil($totalCat / $limiteCat);
+
+$sqlCatResumo = $pdo->prepare("
+    SELECT 
+        c.id,
+        c.nome,
+        COUNT(p.id) AS total_produtos,
+        COALESCE(SUM(p.quantidade), 0) AS total_estoque
+    FROM categoria c
+    LEFT JOIN produtos p ON p.id_categoria = c.id
+    GROUP BY c.id, c.nome
+    ORDER BY c.nome ASC
+    LIMIT :limite OFFSET :offset
+");
+
+$sqlCatResumo->bindValue(':limite', $limiteCat, PDO::PARAM_INT);
+$sqlCatResumo->bindValue(':offset', $offsetCat, PDO::PARAM_INT);
+$sqlCatResumo->execute();
+
+$categoriasResumo = $sqlCatResumo->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -128,6 +156,13 @@ $categorias = $stmtCat->fetchAll(PDO::FETCH_ASSOC);
                             <h3 class="card-title">Lista de Produtos</h3>
                         </div>
                         <?php include 'components/inv_table_products.php'; ?>
+                    </div>
+
+                    <div class="d-flex mt-4">
+                        <?php include 'components/inv_table_categories.php'; ?>
+
+                        <!-- Espaço livre para 60% -->
+                        <div style="width: 60%;"></div>
                     </div>
 
                 </div>
