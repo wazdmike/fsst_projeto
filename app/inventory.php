@@ -116,6 +116,18 @@ $sqlCatResumo->execute();
 
 $categoriasResumo = $sqlCatResumo->fetchAll(PDO::FETCH_ASSOC);
 
+$sqlGraf = $pdo->query("
+    SELECT 
+        c.nome,
+        COUNT(p.id) AS total_produtos
+    FROM categoria c
+    LEFT JOIN produtos p ON p.id_categoria = c.id
+    GROUP BY c.id, c.nome
+    ORDER BY c.nome
+");
+
+$graficoCategorias = $sqlGraf->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -161,8 +173,8 @@ $categoriasResumo = $sqlCatResumo->fetchAll(PDO::FETCH_ASSOC);
                     <div class="d-flex mt-4">
                         <?php include 'components/inv_table_categories.php'; ?>
 
-                        <!-- Espaço livre para 60% -->
-                        <div style="width: 60%;"></div>
+                        <!-- Graficos comparativos -->
+                        <?php include 'components/inv_charts.php'; ?>
                     </div>
 
                 </div>
@@ -179,6 +191,34 @@ $categoriasResumo = $sqlCatResumo->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('graficoCategorias').getContext('2d');
+
+        const labels = <?= json_encode(array_column($graficoCategorias, 'nome')) ?>;
+        const dados = <?= json_encode(array_column($graficoCategorias, 'total_produtos')) ?>;
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total de Produtos',
+                    data: dados,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 
