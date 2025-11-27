@@ -16,12 +16,12 @@
                 <li class="nav-item">
                     <a href="./inventory.php" class="nav-link <?= $paginaAtual === 'inventory.php' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-box"></i>
-                        <p>Inventory</p>
+                        <p>Estoque</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="./clientes.php" class="nav-link <?= $paginaAtual === 'clientes.php' ? 'active' : '' ?>">
+                    <a href="./customer.php" class="nav-link <?= $paginaAtual === 'customer.php' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-shop"></i>
                         <p>Clientes</p>
                     </a>

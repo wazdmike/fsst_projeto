@@ -1,7 +1,6 @@
 <?php require '../conn.php';
 session_start();
 $paginaAtual = basename($_SERVER['PHP_SELF']);
-
 if (!isset($_SESSION['usuario'])) {
     header("Location: ../auth/login.php");
     exit;

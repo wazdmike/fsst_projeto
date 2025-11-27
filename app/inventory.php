@@ -4,7 +4,7 @@ require '../conn.php';
 $paginaAtual = basename($_SERVER['PHP_SELF']);
 
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
+    header("Location: ../auth/login.php");
     exit;
 }
 
@@ -31,8 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_produto'])) {
     $stmt = $pdo->prepare("UPDATE produtos SET nome = ?, id_categoria = ?, quantidade = ?, preco = ? WHERE id = ?");
     $stmt->execute([$nome, $id_categoria, $quantidade, $preco, $id]);
 }
-
-
 
 if (isset($_GET['excluir'])) {
     $id = (int) $_GET['excluir'];
