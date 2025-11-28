@@ -27,6 +27,8 @@ $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $total = $pdo->query("SELECT COUNT(*) FROM clientes")->fetchColumn();
 $totalPaginas = ceil($total / $limite);
 
+$produtos = $pdo->query("SELECT id, nome FROM produtos")->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +56,7 @@ $totalPaginas = ceil($total / $limite);
                     <?php include 'components/add_customer_modal.php'; ?>
                     <!-- Tabela -->
                     <?php include 'components/customers_table.php'; ?>
+                    <?php include 'components/customer_sends_table.php'; ?>
                 </div>
             </section>
         </div>

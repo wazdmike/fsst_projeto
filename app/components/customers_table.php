@@ -25,6 +25,7 @@
                         <td><?= date('d/m/Y H:i', strtotime($cliente['criado_em'])) ?></td>
                         <td>
                             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditar<?= $cliente['id'] ?>">Editar</button>
+                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalEnviar<?= $cliente['id'] ?>">Enviar</button>
                             <a href="?excluir=<?= $cliente['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir este cliente?')">Remover</a>
                         </td>
                     </tr>
@@ -51,7 +52,8 @@
     </div>
 </div>
 
-<!-- Modais de edição -->
+<!-- Modais -->
 <?php foreach ($clientes as $cliente): ?>
     <?php include 'components/customer_edit_modal.php'; ?>
+    <?php include 'components/customer_send_modal.php'; ?>
 <?php endforeach; ?>

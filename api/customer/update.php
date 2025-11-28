@@ -1,16 +1,15 @@
 <?php
-session_start(); // garante que session está ativa, se necessário
+session_start(); 
 require '../../conn.php';
 
 header('Content-Type: application/json');
 
-// Permitir apenas POST
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["erro" => true, "mensagem" => "Método não permitido"]);
     exit;
 }
 
-// Recebendo dados
 $id           = (int)($_POST['id'] ?? 0);
 $nome         = trim($_POST['nome'] ?? '');
 $email        = trim($_POST['email'] ?? '');
