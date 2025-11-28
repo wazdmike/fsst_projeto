@@ -29,7 +29,33 @@ $totalPaginas = ceil($total / $limite);
 
 $produtos = $pdo->query("SELECT id, nome FROM produtos")->fetchAll(PDO::FETCH_ASSOC);
 
+
+if (isset($_GET['excluir'])) {
+    $id_cliente = (int) $_GET['excluir'];
+
+    if ($id_cliente <= 0) {
+        header("Location: customer.php?msg=invalid_id");
+        exit;
+    }
+
+    try {
+        $pdo->beginTransaction();
+
+        $del = $pdo->prepare("DELETE FROM clientes WHERE id = ?");
+        $del->execute([$id_cliente]);
+
+        $pdo->commit();
+        header("Location: customer.php?msg=deleted");
+        exit;
+    } catch (PDOException $e) {
+
+        $pdo->rollBack();
+        header("Location: customer.php?msg=error");
+        exit;
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -48,6 +74,7 @@ $produtos = $pdo->query("SELECT id, nome FROM produtos")->fetchAll(PDO::FETCH_AS
             <!-- Main content -->
             <section class="content pt-3">
                 <div class="container-fluid">
+
                     <div class="d-flex justify-content-end mb-3">
                         <button class="btn btn-success" data-toggle="modal" data-target="#modalCliente">
                             Adicionar Cliente
@@ -57,6 +84,7 @@ $produtos = $pdo->query("SELECT id, nome FROM produtos")->fetchAll(PDO::FETCH_AS
                     <!-- Tabela -->
                     <?php include 'components/customers_table.php'; ?>
                     <?php include 'components/customer_sends_table.php'; ?>
+                    <?php include 'components/customer_returns_table.php'; ?>
                 </div>
             </section>
         </div>

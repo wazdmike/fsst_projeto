@@ -13,7 +13,7 @@ $stmt = $pdo->prepare("
         p.quantidade,
         p.data_pedido
     FROM pedidos p
-    INNER JOIN clientes c   ON p.id_cliente = c.id
+    LEFT JOIN clientes c   ON p.id_cliente = c.id
     INNER JOIN produtos pr  ON p.id_produto = pr.id
     INNER JOIN categoria ca ON p.id_categoria = ca.id
     ORDER BY p.data_pedido DESC
@@ -45,6 +45,7 @@ $total_paginas = ceil($totalPedidos / $limite);
                     <th>Categoria</th>
                     <th>Quantidade</th>
                     <th>Data</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
 
@@ -53,16 +54,26 @@ $total_paginas = ceil($totalPedidos / $limite);
                     <?php foreach ($pedidos as $pedido): ?>
                         <tr>
                             <td><?= $pedido['id'] ?></td>
-                            <td><?= htmlspecialchars($pedido['cliente']) ?></td>
+                            <td>
+                                <?= $pedido['cliente'] ? htmlspecialchars($pedido['cliente']) : "<i>Cliente removido</i>" ?>
+                            </td>
                             <td><?= htmlspecialchars($pedido['produto']) ?></td>
                             <td><?= htmlspecialchars($pedido['categoria']) ?></td>
                             <td><?= $pedido['quantidade'] ?></td>
                             <td><?= date('d/m/Y H:i', strtotime($pedido['data_pedido'])) ?></td>
+                            <td>
+                                <form action="../api/customer/return_product.php" method="POST" style="display:inline-block;">
+                                    <input type="hidden" name="id_pedido" value="<?= $pedido['id'] ?>">
+                                    <button type="submit" class="btn btn-warning btn-sm">
+                                        Devolver
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6" class="text-center">Nenhum pedido registrado.</td>
+                        <td colspan="7" class="text-center">Nenhum pedido registrado.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

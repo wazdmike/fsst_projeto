@@ -1,9 +1,6 @@
 <?php
 require '../../conn.php';
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["erro" => true, "mensagem" => "Método não permitido"]);
-    exit;
-}
+
 $id_cliente   = $_POST['id_cliente'];
 $id_produto   = $_POST['id_produto'];
 $quantidade   = $_POST['quantidade'];
@@ -23,7 +20,7 @@ try {
     $estoque_atual = $produto['quantidade'];
 
     if ($estoque_atual < $quantidade) {
-        throw new Exception("Estoque insuficiente! Só tem $estoque_atual unidades.");
+        throw new Exception("Estoque insuficiente! Só tem $estoque_atual unidades.");   
     }
 
     $stmt = $pdo->prepare("
