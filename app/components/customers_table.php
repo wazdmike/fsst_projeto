@@ -10,6 +10,7 @@
                     <th>Endereço</th>
                     <th>Cidade/UF</th>
                     <th>Adicionado em</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,10 @@
                         </td>
                         <td><?= htmlspecialchars($cliente['cidade']) ?>/<?= htmlspecialchars($cliente['estado']) ?></td>
                         <td><?= date('d/m/Y H:i', strtotime($cliente['criado_em'])) ?></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalEditar<?= $cliente['id'] ?>">Editar</button>
+                            <a href="?excluir=<?= $cliente['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Deseja realmente excluir este cliente?')">Remover</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -45,3 +50,8 @@
         </div>
     </div>
 </div>
+
+<!-- Modais de edição -->
+<?php foreach ($clientes as $cliente): ?>
+    <?php include 'components/customer_edit_modal.php'; ?>
+<?php endforeach; ?>

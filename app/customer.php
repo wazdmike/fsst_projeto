@@ -14,7 +14,7 @@ if ($pagina < 1) $pagina = 1;
 $offset = ($pagina - 1) * $limite;
 
 $stmt = $pdo->prepare("
-    SELECT id, nome, logradouro, numero, complemento, bairro, cidade, estado, criado_em
+    SELECT id, nome, email, telefone, cep, logradouro, numero, complemento, bairro, cidade, estado, criado_em
     FROM clientes
     ORDER BY criado_em DESC
     LIMIT :limite OFFSET :offset
