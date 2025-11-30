@@ -1,15 +1,15 @@
-<div class="row">
-    <div class="col-md-6">
-        <div class="card card-info" style="width: 400px; height: 460px;">
-            <div class="card-header">
-                <h3 class="card-title">Produtos por Categoria</h3>
-            </div>
-            <div class="card-body">
-                <canvas id="categoryPieChart"></canvas>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-info" style="width: 400px; height: 460px;">
+                <div class="card-header">
+                    <h3 class="card-title">Produtos por Categoria</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="categoryPieChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -57,8 +57,19 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         <?php include 'components/dashboard_summary_cards.php' ?>
                     </div>
 
-                    <!-- Gráfico Pizza + Tabela -->
-                    <?php include 'components/pie_chart.php' ?>
+                    <div style="display: flex; gap: 20px;">
+
+                        <!-- Gráfico de Pizza -->
+                        <div style="width: 400px;">
+                            <?php include 'components/pie_chart.php' ?>
+                        </div>
+
+                        <!-- Gráfico de Linhas -->
+                        <div style="width: 600px;">
+                            <?php include 'components/line_chart.php' ?>
+                        </div>
+
+                    </div>
 
                 </div>
             </section>
